@@ -27,6 +27,8 @@ export default function Home(props) {
   //   </div>
   // )
   const { data: session } = useSession()
+
+  console.log(session)
   if (session) {
     return (
       <>
