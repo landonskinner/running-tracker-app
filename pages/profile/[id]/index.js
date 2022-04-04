@@ -1,6 +1,7 @@
 import Head from "next/head";
 import styles from "../../../styles/Profile.module.css";
 import prisma from "../../../lib/prisma";
+import RunStats from "../../../components/RunStats";
 
 export default function Profile(props) {
 
@@ -23,6 +24,7 @@ export default function Profile(props) {
       </Head>
       <h1>{firstName}'s Page</h1>
       {renderRuns}
+      <RunStats user={user}/>
     </div>
   );
 }
