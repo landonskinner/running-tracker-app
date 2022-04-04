@@ -47,23 +47,39 @@ datasource db {
 // }
 
 model User {
-  id        Int      @id @default(autoincrement())
-  name      String?
-  email     String?  @unique
-  createdAt DateTime @default(now()) @map(name: "created_at")
+  id            Int            @id @default(autoincrement())
+  firstName     String?
+  lastName      String?
+  email         String?        @unique
+  createdAt     DateTime       @default(now()) @map(name: "created_at")
   // emailVerified DateTime?
   // image         String?
   // accounts      Account[]
   // sessions      Session[]
-  runs      Run[]
+  scheduledRuns ScheduledRun[]
 
   @@map(name: "users")
 }
 
-model Run {
-  id        Int      @id @default(autoincrement())
-  distance  Int
-  createdAt DateTime @default(now()) @map(name: "created_at")
-  User      User?    @relation(fields: [userId], references: [id])
-  userId    Int?
+model ScheduledRun {
+  id           Int           @id @default(autoincrement())
+  distance     Int
+  paceMinutes  Int?
+  paceSeconds  Int?
+  date         DateTime
+  createdAt    DateTime      @default(now()) @map(name: "created_at")
+  user         User?         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  userId       Int?
+  completedRun CompletedRun?
+}
+
+model CompletedRun {
+  id             Int          @id @default(autoincrement())
+  paceMinutes    Int
+  paceSeconds    Int
+  calories       Int?
+  rating         Int?
+  realDistance   Float
+  scheduledRun   ScheduledRun @relation(fields: [scheduledRunId], references: [id], onDelete: Cascade)
+  scheduledRunId Int          @unique
 }

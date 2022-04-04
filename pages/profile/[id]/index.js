@@ -6,22 +6,22 @@ export default function Profile(props) {
 
   let user = JSON.parse(props.user)
 
-  const {id, name, email, runs} = user;
+  const {id, firstName, email, scheduledRuns} = user;
 
-  const renderRuns = runs.map(run => {
+  const renderRuns = scheduledRuns.map(run => {
       return (
-          <div>Distance: {run.distance}</div>
+          <div key={run.id} >Distance: {run.distance}</div>
       )
   })
 
   return (
     <div className={styles.container}>
       <Head>
-        <title>{name}'s Page</title>
+        <title>{firstName}'s Page</title>
         <meta name="description" content="Running tracker" />
         <link rel="icon" href="/favicon.ico" />
       </Head>
-      <h1>{name}'s Page</h1>
+      <h1>{firstName}'s Page</h1>
       {renderRuns}
     </div>
   );
@@ -46,7 +46,11 @@ export async function getStaticProps(context) {
       id: userId,
     },
     include: {
-        runs: true
+        scheduledRuns: {
+            include: {
+                completedRun: true
+            }
+        }
     },
   });
   user = JSON.stringify(user);

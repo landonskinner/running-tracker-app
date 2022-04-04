@@ -10,8 +10,8 @@ export default function Home(props) {
   const renderUsers = users.map((user) => {
     return (
       <>
-        <div key={user.id}>{user.name}</div>
-        <div>{user.runs[0]?.distance}</div>
+        <div key={user.id}>{user.firstName + ' ' + user.lastName}</div>
+        <div>{user.scheduledRuns[0]?.distance}</div>
       </>
     )
   })
@@ -48,7 +48,7 @@ export default function Home(props) {
 export async function getStaticProps() {
   let users = await prisma.user.findMany({
     include: {
-      runs: true
+      scheduledRuns: true
     },
   });
   users = JSON.stringify(users)
