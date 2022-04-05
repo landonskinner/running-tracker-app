@@ -9,12 +9,6 @@ export default function Profile(props) {
 
   const {id, firstName, email, scheduledRuns} = user;
 
-  const renderRuns = scheduledRuns.map(run => {
-      return (
-          <div key={run.id} >Distance: {run.distance}</div>
-      )
-  })
-
   return (
     <div className={styles.container}>
       <Head>
@@ -23,8 +17,9 @@ export default function Profile(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>{firstName}'s Page</h1>
-      {renderRuns}
-      <RunStats user={user}/>
+      <RunStats user={user} period="week"/>
+      {/* <RunStats user={user} period="month"/>
+      <RunStats user={user} period="all"/> */}
     </div>
   );
 }

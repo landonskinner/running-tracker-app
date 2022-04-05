@@ -1,0 +1,31 @@
+.list {
+    display: grid;
+    gap: 0.5rem;
+}
+
+.statContainer {
+    border: 5px solid black;
+    border-radius: 1em;
+    padding: 0.5em;
+    text-align: center;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+}
+
+.statTitle {
+    color: red;
+    flex: 0 0 100%;
+}
+
+.data {
+    color: red;
+    display: block;
+}
+
+@media (min-width: 30em) {
+    .list {
+        grid-template-columns: repeat(3, 1fr);
+    }
+}
