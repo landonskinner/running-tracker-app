@@ -1,9 +1,16 @@
+import { useState } from "react";
 import Head from "next/head";
 import styles from "../../../styles/Profile.module.css";
 import prisma from "../../../lib/prisma";
 import RunStats from "../../../components/RunStats";
+import RunStatsNav from "../../../components/RunStatsNav";
+import RunCalendar from "../../../components/RunCalendar";
+
 
 export default function Profile(props) {
+
+    const [period, setPeriod] = useState('week')
+
 
   let user = JSON.parse(props.user)
 
@@ -17,9 +24,9 @@ export default function Profile(props) {
         <link rel="icon" href="/favicon.ico" />
       </Head>
       <h1>{firstName}'s Page</h1>
-      <RunStats user={user} period="week"/>
-      {/* <RunStats user={user} period="month"/>
-      <RunStats user={user} period="all"/> */}
+      <RunStatsNav setPeriod={setPeriod} />
+      <RunStats user={user} period={period}/>
+        <RunCalendar user={user}/>
     </div>
   );
 }

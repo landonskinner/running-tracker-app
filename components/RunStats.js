@@ -31,7 +31,6 @@ function RunStats({ user, period }) {
     if (!runsArr.length) return noDataMsg;
     let totalDistance = 0;
     runsArr.forEach((run) => (totalDistance += run.completedRun.realDistance));
-    console.log(totalDistance, runsArr.length);
     return totalDistance / runsArr.length;
   };
 
@@ -84,23 +83,23 @@ function RunStats({ user, period }) {
   return (
     <div className={styles.list}>
       <div className={styles.statContainer}>
-        <div className={styles.statTitle}>Average Length:</div>
+        <div className={styles.statTitle}>Length</div>
         <span className={styles.data}>{averageLength(completedRuns)}</span>
       </div>
       <div className={styles.statContainer}>
-        <div className={styles.statTitle}>Average Pace:</div>
+        <div className={styles.statTitle}>Pace</div>
         <span className={styles.data}>{averagePace(completedRuns)}</span>
       </div>
       <div className={styles.statContainer}>
-        <div className={styles.statTitle}>Average Calories:</div>
+        <div className={styles.statTitle}>Calories</div>
         <span className={styles.data}>{averageCalories(completedRuns)}</span>
       </div>
       <div className={styles.statContainer}>
-        <div className={styles.statTitle}>Average Rating:</div>
+        <div className={styles.statTitle}>Rating</div>
         <span className={styles.data}>{averageRating(completedRuns)}</span>
       </div>
       <div className={styles.statContainer}>
-        <div className={styles.statTitle}>Average Completion Percentage:</div>
+        <div className={styles.statTitle}>Completion Percentage</div>
         <span className={styles.data}>
           {percentCompleted(completedRuns, period)}
         </span>
