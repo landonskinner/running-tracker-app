@@ -1,28 +1,33 @@
 import { useState } from "react";
 import Calendar from "react-calendar";
+import RunDetails from "./RunDetails";
 import 'react-calendar/dist/Calendar.css';
+import '../styles/RunCalendar.module.css'
 
 function RunCalendar({user}) {
   const [date, setDate] = useState(new Date());
 
-  const { scheduledRuns } = user;
-  console.log(scheduledRuns)
-  const scheduledRunDates = scheduledRuns.map(run => new Date(run.date))
-  console.log(scheduledRunDates)
+  const scheduledRunDates = user.scheduledRuns.map(run => {
+      return {
+          completedRun: run.completedRun,
+          date: new Date(run.date)
+      }
+    })
 
   const formatRunDay = (date) => {
-    //   console.log(date)
-    // date = date.toISOString();
     let dayFormat;
-    scheduledRunDates.filter(runDate => {
-        console.log(runDate.getDate(), date.getDate(), date.getDate() === runDate.getDate())
-        if (runDate.getDate() === date.getDate() && runDate.getMonth() === date.getMonth() && runDate.getFullYear() === date.getFullYear()) {
-            dayFormat = <div style={{color: 'red'}}>{date.getDate()}</div>
+    scheduledRunDates.forEach(runDate => {
+        if (runDate.date.toDateString() === date.toDateString()) {    
+            if (runDate.completedRun) {
+                    dayFormat = <div style={{color: 'green'}}>{date.getDate()}</div>
+                } else {
+                    dayFormat = <div style={{color: 'red'}}>{date.getDate()}</div>
+                }
         }
     })
-      return dayFormat || date.getDate()
+      return dayFormat || <div>{date.getDate()}</div>
   }
-    console.log(date.toISOString())
+
   return (
     <>
       <div className="calendar-container">
@@ -33,9 +38,8 @@ function RunCalendar({user}) {
             formatDay={(locale, date) => formatRunDay(date)}
         />
       </div>
-      <p className="text-center">
-        <span className="bold">Selected Date:</span> {date.toDateString()}
-      </p>
+          <RunDetails user={user} date={date} />
+        {/* <span className="bold">Selected Date:</span> {date.toDateString()} */}
     </>
   );
 }

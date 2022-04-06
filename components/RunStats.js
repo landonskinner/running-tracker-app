@@ -19,6 +19,7 @@ function RunStats({ user, period }) {
     scheduledRuns.filter((run) => {
       // filter runs that have been completed within the specified timeframe
       if (period === "all") return run.completedRun;
+      console.log(dateLimit(period))
       return run.completedRun && run.date >= dateLimit(period);
     });
 

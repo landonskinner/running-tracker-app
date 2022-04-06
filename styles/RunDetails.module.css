@@ -1,0 +1,14 @@
+.list {
+    display: grid !important;
+    gap: 0.5rem;
+}
+
+.data {
+    color: red !important;
+}
+
+@media (min-width: 414px) {
+    .list {
+        grid-template-columns: repeat(2, 1fr);
+    }
+}
