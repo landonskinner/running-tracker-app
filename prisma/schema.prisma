@@ -63,7 +63,7 @@ model User {
 
 model ScheduledRun {
   id           Int           @id @default(autoincrement())
-  distance     Int
+  distance     Float
   paceMinutes  Int?
   paceSeconds  Int?
   date         DateTime

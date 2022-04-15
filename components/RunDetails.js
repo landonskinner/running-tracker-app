@@ -42,7 +42,7 @@ function RunDetails({ user, date }) {
                 Rating: <span className={styles.data}>{run.rating}</span>
               </p>
             </>
-          ) : null}
+          ) : <Link href={`/profile/${user.id}/complete/${selectedRun.id}`}>Log your run!</Link>}
         </div>
       </>
     );
